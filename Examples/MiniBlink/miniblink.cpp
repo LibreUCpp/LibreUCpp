@@ -14,6 +14,9 @@ int main()
 #ifdef SAMMY_C21
     Pin led { Port::A[28] };
 #endif
+#ifdef ADAFRUIT_ATSAMD09_BREAKOUT
+    Pin led { Port::A[27] };
+#endif
 
     led.EnablePeripheral();
     led.SetDirection(Pin::Direction::OUTPUT);
