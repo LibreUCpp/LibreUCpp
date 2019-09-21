@@ -1,0 +1,2 @@
+add_library(LIBREUCPP_PERIPH_ARM_COMMON INTERFACE)
+target_include_directories(LIBREUCPP_PERIPH_ARM_COMMON INTERFACE include/)

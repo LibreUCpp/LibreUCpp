@@ -1,0 +1,3 @@
+add_subdirectory(MiniBlink)
+add_subdirectory(SystickBlink)
+add_subdirectory(Semihosting)
