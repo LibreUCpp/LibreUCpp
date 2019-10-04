@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include <LibreUCpp/Compiler.h>
 #include <LibreUCpp/Peripherals/GCLK.h>
-#include <LibreUCpp/HAL/SYSCTRL.h>
 #include <LibreUCpp/HAL/OSC8M.h>
 #include <LibreUCpp/HAL/DPLL.h>
+#include <LibreUCpp/HAL/DFLL.h>
 
 namespace LibreUCpp { 
 namespace HAL {
@@ -133,6 +133,12 @@ class GCLK
                 | CLKCTRL_T::ID(static_cast<unsigned>(ch));
         }
 
+        static GENERATOR GetGenerator(PERIPHERAL_CHANNEL ch)
+        {
+            auto clkctrl = ReadClkCtrl(ch);
+            return static_cast<GENERATOR>(clkctrl.bit.GEN);
+        }
+
         static void ConfigureGenerator(
             GENERATOR generator, 
             CLOCK_SOURCE clockSource,
@@ -200,6 +206,14 @@ class GCLK
             return *reinterpret_cast<Peripherals::GCLK_T*>(Peripherals::GCLK_T::BASE_ADDRESS);
         }
 
+        static CLKCTRL_T ReadClkCtrl(PERIPHERAL_CHANNEL ch)
+        {
+            volatile uint8_t* selreg = reinterpret_cast<uint8_t*>(GCLK_T::BASE_ADDRESS + GCLK_T::ADDR_OFFSET_CLKCTRL);
+            *selreg = static_cast<unsigned char>(ch);
+            WaitSync();
+            return Periph().CLKCTRL;
+        }
+
         static GENCTRL_T ReadGenCtrl(GENERATOR id)
         {
             volatile uint8_t* selreg = reinterpret_cast<uint8_t*>(GCLK_T::BASE_ADDRESS + GCLK_T::ADDR_OFFSET_GENCTRL);
@@ -241,7 +255,7 @@ class GCLK
                 case CLOCK_SOURCE::OSC8M:
                     return OSC8M::CalcOutputFrequency();
                 case CLOCK_SOURCE::DFLL48M:
-                    return SYSCTRL::CalcDFLL48MOutputFrequency(xosc32kFrequency, xoscFrequency);
+                    return DFLL::CalcOutputFrequency(xosc32kFrequency, xoscFrequency);
                 case CLOCK_SOURCE::FDPLL96M:
                     return DPLL::CalcOutputFrequency(xosc32kFrequency, xoscFrequency);
                 default:

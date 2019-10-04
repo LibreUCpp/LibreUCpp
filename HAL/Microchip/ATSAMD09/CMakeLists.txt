@@ -1,6 +1,6 @@
 project(LIBREUCPP_HAL_ATSAMD09 LANGUAGES CXX)
     add_library(${PROJECT_NAME} STATIC)
-    target_sources(${PROJECT_NAME} PRIVATE src/Pin.cpp src/Port.cpp src/DPLL.cpp)
+    target_sources(${PROJECT_NAME} PRIVATE src/Pin.cpp src/Port.cpp src/DPLL.cpp src/DFLL.cpp)
     target_include_directories(${PROJECT_NAME} PUBLIC include/)
     target_link_libraries(
         ${PROJECT_NAME} PUBLIC 
