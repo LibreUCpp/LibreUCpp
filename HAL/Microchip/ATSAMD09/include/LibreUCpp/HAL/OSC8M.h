@@ -23,7 +23,7 @@ class OSC8M
             CTRL().bit.PRESC = static_cast<unsigned>(div);
         }
 
-        static unsigned GetOutputFrequency()
+        static unsigned CalcOutputFrequency()
         {
             return 8000000u >> CTRL().bit.PRESC;
         }
