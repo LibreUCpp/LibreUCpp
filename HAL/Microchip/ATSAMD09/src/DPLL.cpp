@@ -5,6 +5,8 @@ using namespace LibreUCpp::HAL;
 
 unsigned DPLL::GetReferenceClockFrequency(unsigned xosc32kFrequency, unsigned xoscFrequency)
 {
+    GCLK::GENERATOR gen;
+
     switch (static_cast<REFCLK>(GetPeriph().DPLLCTRLB.bit.REFCLK))
     {
         case REFCLK::XOSC32K:
@@ -12,7 +14,8 @@ unsigned DPLL::GetReferenceClockFrequency(unsigned xosc32kFrequency, unsigned xo
         case REFCLK::XOSC:
             return xoscFrequency / (2u*(GetPeriph().DPLLCTRLB.bit.DIV + 1u));
         case REFCLK::GCLK:
-            return GCLK::CalcFrequency(GCLK::GENERATOR::Generator_1, xoscFrequency, xoscFrequency);
+            gen = GCLK::GetGenerator(GCLK::PERIPHERAL_CHANNEL::GCLK_DPLL);
+            return GCLK::CalcFrequency(gen, xoscFrequency, xoscFrequency);
         default:
             abort();
     }
