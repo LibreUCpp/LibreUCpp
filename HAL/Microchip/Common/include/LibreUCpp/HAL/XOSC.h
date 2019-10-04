@@ -1,7 +1,13 @@
 #pragma once
 
 #include <LibreUCpp/Compiler.h>
+
+#ifdef LIBREUCPP_ATSAMC
 #include <LibreUCpp/Peripherals/OSCCTRL.h>
+#endif
+#ifdef LIBREUCPP_ATSAMD
+#include <LibreUCpp/Peripherals/SYSCTRL.h>
+#endif
 
 namespace LibreUCpp {
 namespace HAL {
@@ -54,37 +60,57 @@ class XOSC
 
         static ALWAYS_INLINE void Enable()
         {
-            OSCCTRL().XOSCCTRL.bit.ENABLE = 1;
+            CTRL().bit.ENABLE = 1;
         }
 
         static ALWAYS_INLINE void Disable()
         {
-            OSCCTRL().XOSCCTRL.bit.ENABLE = 0;
+            CTRL().bit.ENABLE = 0;
         }
 
         static ALWAYS_INLINE void WaitReady()
         {
-            while (!OSCCTRL().STATUS.bit.XOSCRDY);
+            while (!STATUS().bit.XOSCRDY);
         }
 
         static ALWAYS_INLINE void Configure(CRYSTAL crystal, GAIN gain, STARTUP_TIME startupTime)
         {
-            OSCCTRL().XOSCCTRL.reg = XOSCCTRL_T::STARTUP(static_cast<unsigned>(startupTime))
-                                   | XOSCCTRL_T::GAIN(static_cast<unsigned>(gain))
-                                   | XOSCCTRL_T::XTALEN(static_cast<unsigned>(crystal));
+            CTRL().reg = CTRL_T::STARTUP(static_cast<unsigned>(startupTime))
+                       | CTRL_T::GAIN(static_cast<unsigned>(gain))
+                       | CTRL_T::XTALEN(static_cast<unsigned>(crystal));
         }
 
         static ALWAYS_INLINE void SetAutomaticAmplitudeGain(AUTOMATIC_AMPLITUDE_GAIN ampgc)
         {
-            OSCCTRL().XOSCCTRL.bit.AMPGC = static_cast<unsigned>(ampgc);
+            CTRL().bit.AMPGC = static_cast<unsigned>(ampgc);
         }
 
     private:
-        using XOSCCTRL_T = Peripherals::OSCCTRL_T::XOSCCTRL_T;
 
-        static ALWAYS_INLINE Peripherals::OSCCTRL_T& OSCCTRL()
-        { 
-            return *reinterpret_cast<Peripherals::OSCCTRL_T*>(Peripherals::OSCCTRL_T::BASE_ADDRESS);
+#ifdef LIBREUCPP_ATSAMD
+        using SYSCTRL_T = Peripherals::SYSCTRL_T;
+        using CTRL_T = SYSCTRL_T::XOSC_T;
+        using STATUS_T = SYSCTRL_T::PCLKSR_T;
+        static constexpr intptr_t ADDR_CTRL = SYSCTRL_T::BASE_ADDRESS + SYSCTRL_T::ADDR_OFFSET_XOSC;
+        static constexpr intptr_t ADDR_STATUS = SYSCTRL_T::BASE_ADDRESS + SYSCTRL_T::ADDR_OFFSET_PCLKSR;
+#endif
+
+#ifdef LIBREUCPP_ATSAMC
+        using OSCCTRL_T = Peripherals::OSCCTRL_T;
+        using CTRL_T = OSCCTRL_T::XOSCCTRL_T;
+        using STATUS_T = OSCCTRL_T::STATUS_T;
+        static constexpr intptr_t ADDR_CTRL = OSCCTRL_T::BASE_ADDRESS + OSCCTRL_T::ADDR_OFFSET_XOSCCTRL;
+        static constexpr intptr_t ADDR_STATUS = OSCCTRL_T::BASE_ADDRESS + OSCCTRL_T::ADDR_OFFSET_STATUS;
+#endif
+
+        static ALWAYS_INLINE CTRL_T& CTRL()
+        {
+            return *reinterpret_cast<CTRL_T*>(ADDR_CTRL);
+        }
+
+        static ALWAYS_INLINE STATUS_T& STATUS()
+        {
+            return *reinterpret_cast<STATUS_T*>(ADDR_STATUS);
         }
 
 };
