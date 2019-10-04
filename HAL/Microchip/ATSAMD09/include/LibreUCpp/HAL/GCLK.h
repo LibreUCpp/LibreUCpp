@@ -4,6 +4,7 @@
 #include <LibreUCpp/Compiler.h>
 #include <LibreUCpp/Peripherals/GCLK.h>
 #include <LibreUCpp/HAL/SYSCTRL.h>
+#include <LibreUCpp/HAL/OSC8M.h>
 
 namespace LibreUCpp { 
 namespace HAL {
@@ -237,7 +238,7 @@ class GCLK
                 case CLOCK_SOURCE::XOSC32K:
                     return xosc32kFrequency;
                 case CLOCK_SOURCE::OSC8M:
-                    return SYSCTRL::CalcOSC8MOutputFrequency();
+                    return OSC8M::CalcOutputFrequency();
                 case CLOCK_SOURCE::DFLL48M:
                     return SYSCTRL::CalcDFLL48MOutputFrequency(xosc32kFrequency, xoscFrequency);
                 case CLOCK_SOURCE::FDPLL96M:
