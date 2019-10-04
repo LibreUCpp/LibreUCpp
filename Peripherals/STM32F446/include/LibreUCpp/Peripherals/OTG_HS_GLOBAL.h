@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) OTG_HS_GLOBAL_T
 {
     static constexpr size_t INSTANCE_SIZE = 304;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 304;
     static constexpr intptr_t BASE_ADDRESS = 0x40040000;
 
     static constexpr intptr_t ADDR_OFFSET_OTG_HS_GOTGCTL = 0x00;
@@ -815,7 +816,7 @@ struct __attribute__((aligned(4), packed)) OTG_HS_GLOBAL_T
 
 }; // struct OTG_HS_GLOBAL_T
 
-static_assert(sizeof(OTG_HS_GLOBAL_T) == OTG_HS_GLOBAL_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(OTG_HS_GLOBAL_T) == OTG_HS_GLOBAL_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp

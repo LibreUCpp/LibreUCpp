@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) FPU_CPACR_T
 {
     static constexpr size_t INSTANCE_SIZE = 4;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 4;
     static constexpr intptr_t BASE_ADDRESS = 0xe000ed88;
 
     static constexpr intptr_t ADDR_OFFSET_CPACR = 0x00;
@@ -30,7 +31,7 @@ struct __attribute__((aligned(4), packed)) FPU_CPACR_T
 
 }; // struct FPU_CPACR_T
 
-static_assert(sizeof(FPU_CPACR_T) == FPU_CPACR_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(FPU_CPACR_T) == FPU_CPACR_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp

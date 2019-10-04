@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) FSMC_T
 {
     static constexpr size_t INSTANCE_SIZE = 288;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 288;
     static constexpr intptr_t BASE_ADDRESS = 0xa0000000;
 
     static constexpr intptr_t ADDR_OFFSET_BCR1 = 0x00;
@@ -1067,7 +1068,7 @@ struct __attribute__((aligned(4), packed)) FSMC_T
 
 }; // struct FSMC_T
 
-static_assert(sizeof(FSMC_T) == FSMC_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(FSMC_T) == FSMC_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp

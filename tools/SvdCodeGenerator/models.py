@@ -150,6 +150,9 @@ class Peripheral(RegisterContainer):
         else:
             return super().size()
 
+    def padded_size(self):
+        return 4 + 4*int((self.size()-1)/4)
+
 
 class RegisterCluster(RegisterContainer):
     def __init__(self, name):

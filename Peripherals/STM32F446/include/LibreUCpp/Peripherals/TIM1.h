@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) TIM1_T
 {
     static constexpr size_t INSTANCE_SIZE = 80;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 80;
     static constexpr intptr_t BASE_ADDRESS_TIM1 = 0x40010000;
     static constexpr intptr_t BASE_ADDRESS_TIM8 = 0x40010400;
 
@@ -699,7 +700,7 @@ struct __attribute__((aligned(4), packed)) TIM1_T
 
 }; // struct TIM1_T
 
-static_assert(sizeof(TIM1_T) == TIM1_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(TIM1_T) == TIM1_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp

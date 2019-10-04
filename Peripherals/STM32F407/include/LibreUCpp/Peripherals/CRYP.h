@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) CRYP_T
 {
     static constexpr size_t INSTANCE_SIZE = 144;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 144;
     static constexpr intptr_t BASE_ADDRESS = 0x50060000;
 
     static constexpr intptr_t ADDR_OFFSET_CR = 0x00;
@@ -2075,7 +2076,7 @@ struct __attribute__((aligned(4), packed)) CRYP_T
 
 }; // struct CRYP_T
 
-static_assert(sizeof(CRYP_T) == CRYP_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(CRYP_T) == CRYP_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp

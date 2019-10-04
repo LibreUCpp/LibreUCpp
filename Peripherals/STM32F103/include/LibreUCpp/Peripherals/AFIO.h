@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) AFIO_T
 {
     static constexpr size_t INSTANCE_SIZE = 32;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 32;
     static constexpr intptr_t BASE_ADDRESS = 0x40010000;
 
     static constexpr intptr_t ADDR_OFFSET_EVCR = 0x00;
@@ -263,7 +264,7 @@ struct __attribute__((aligned(4), packed)) AFIO_T
 
 }; // struct AFIO_T
 
-static_assert(sizeof(AFIO_T) == AFIO_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(AFIO_T) == AFIO_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp

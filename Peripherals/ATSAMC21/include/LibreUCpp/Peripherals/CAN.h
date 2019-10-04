@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) CAN_T
 {
     static constexpr size_t INSTANCE_SIZE = 252;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 252;
     static constexpr intptr_t BASE_ADDRESS_CAN0 = 0x42001c00;
     static constexpr intptr_t BASE_ADDRESS_CAN1 = 0x42002000;
 
@@ -2526,7 +2527,7 @@ struct __attribute__((aligned(4), packed)) CAN_T
 
 }; // struct CAN0_T
 
-static_assert(sizeof(CAN_T) == CAN_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(CAN_T) == CAN_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp

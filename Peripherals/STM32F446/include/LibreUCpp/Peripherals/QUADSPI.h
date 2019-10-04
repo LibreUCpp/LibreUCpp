@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) QUADSPI_T
 {
     static constexpr size_t INSTANCE_SIZE = 52;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 52;
     static constexpr intptr_t BASE_ADDRESS = 0xa0001000;
 
     static constexpr intptr_t ADDR_OFFSET_CR = 0x00;
@@ -358,7 +359,7 @@ struct __attribute__((aligned(4), packed)) QUADSPI_T
 
 }; // struct QUADSPI_T
 
-static_assert(sizeof(QUADSPI_T) == QUADSPI_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(QUADSPI_T) == QUADSPI_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp

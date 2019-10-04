@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) DCMI_T
 {
     static constexpr size_t INSTANCE_SIZE = 44;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 44;
     static constexpr intptr_t BASE_ADDRESS = 0x50050000;
 
     static constexpr intptr_t ADDR_OFFSET_CR = 0x00;
@@ -335,7 +336,7 @@ struct __attribute__((aligned(4), packed)) DCMI_T
 
 }; // struct DCMI_T
 
-static_assert(sizeof(DCMI_T) == DCMI_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(DCMI_T) == DCMI_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp

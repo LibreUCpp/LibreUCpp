@@ -34,6 +34,7 @@ namespace {{ ns }} {
 struct __attribute__((aligned(4), packed)) {{ periph.unified_name }}_T
 {
     static constexpr size_t INSTANCE_SIZE = {{ periph.size() }};
+    static constexpr size_t PADDED_INSTANCE_SIZE = {{ periph.padded_size() }};
 {%- for name, addr in periph.iter_base_addresses() %}
     static constexpr intptr_t {{name}} = {{ '0x%02x' % addr }};
 {%- endfor %}
@@ -55,7 +56,7 @@ struct __attribute__((aligned(4), packed)) {{ periph.unified_name }}_T
 {%- endif %}
 }; // struct {{ periph.name }}_T
 
-static_assert(sizeof({{ periph.unified_name }}_T) == {{ periph.unified_name }}_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof({{ periph.unified_name }}_T) == {{ periph.unified_name }}_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 {% for ns in namespaces|reverse %}
 } // namespace {{ ns }}
 {%- endfor %}

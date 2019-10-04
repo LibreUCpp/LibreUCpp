@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) UART_T
 {
     static constexpr size_t INSTANCE_SIZE = 24;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 24;
     static constexpr intptr_t BASE_ADDRESS_UART4 = 0x40004c00;
     static constexpr intptr_t BASE_ADDRESS_UART5 = 0x40005000;
     static constexpr intptr_t BASE_ADDRESS_UART7 = 0x40007800;
@@ -244,7 +245,7 @@ struct __attribute__((aligned(4), packed)) UART_T
 
 }; // struct UART4_T
 
-static_assert(sizeof(UART_T) == UART_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(UART_T) == UART_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp

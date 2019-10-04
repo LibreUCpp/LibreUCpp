@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) HMATRIX_T
 {
     static constexpr size_t INSTANCE_SIZE = 336;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 336;
     static constexpr intptr_t BASE_ADDRESS = 0x41007000;
 
     static constexpr intptr_t ADDR_OFFSET_PRAS = 0x80;
@@ -118,7 +119,7 @@ struct __attribute__((aligned(4), packed)) HMATRIX_T
 
 }; // struct HMATRIX_T
 
-static_assert(sizeof(HMATRIX_T) == HMATRIX_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(HMATRIX_T) == HMATRIX_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp

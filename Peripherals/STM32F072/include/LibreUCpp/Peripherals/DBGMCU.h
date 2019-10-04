@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) DBGMCU_T
 {
     static constexpr size_t INSTANCE_SIZE = 16;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 16;
     static constexpr intptr_t BASE_ADDRESS = 0x40015800;
 
     static constexpr intptr_t ADDR_OFFSET_IDCODE = 0x00;
@@ -132,7 +133,7 @@ struct __attribute__((aligned(4), packed)) DBGMCU_T
 
 }; // struct DBGMCU_T
 
-static_assert(sizeof(DBGMCU_T) == DBGMCU_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(DBGMCU_T) == DBGMCU_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp

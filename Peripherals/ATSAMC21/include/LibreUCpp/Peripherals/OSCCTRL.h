@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) OSCCTRL_T
 {
     static constexpr size_t INSTANCE_SIZE = 60;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 60;
     static constexpr intptr_t BASE_ADDRESS = 0x40001000;
 
     static constexpr intptr_t ADDR_OFFSET_INTENCLR = 0x00;
@@ -509,7 +510,7 @@ struct __attribute__((aligned(4), packed)) OSCCTRL_T
 
 }; // struct OSCCTRL_T
 
-static_assert(sizeof(OSCCTRL_T) == OSCCTRL_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(OSCCTRL_T) == OSCCTRL_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp

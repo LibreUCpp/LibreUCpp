@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) SPDIF_RX_T
 {
     static constexpr size_t INSTANCE_SIZE = 28;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 28;
     static constexpr intptr_t BASE_ADDRESS = 0x40004000;
 
     static constexpr intptr_t ADDR_OFFSET_CR = 0x00;
@@ -275,7 +276,7 @@ struct __attribute__((aligned(4), packed)) SPDIF_RX_T
 
 }; // struct SPDIF_RX_T
 
-static_assert(sizeof(SPDIF_RX_T) == SPDIF_RX_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(SPDIF_RX_T) == SPDIF_RX_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp

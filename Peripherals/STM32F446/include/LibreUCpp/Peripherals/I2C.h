@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) I2C_T
 {
     static constexpr size_t INSTANCE_SIZE = 40;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 40;
     static constexpr intptr_t BASE_ADDRESS_I2C1 = 0x40005400;
     static constexpr intptr_t BASE_ADDRESS_I2C2 = 0x40005800;
     static constexpr intptr_t BASE_ADDRESS_I2C3 = 0x40005c00;
@@ -354,7 +355,7 @@ struct __attribute__((aligned(4), packed)) I2C_T
 
 }; // struct I2C1_T
 
-static_assert(sizeof(I2C_T) == I2C_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(I2C_T) == I2C_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp

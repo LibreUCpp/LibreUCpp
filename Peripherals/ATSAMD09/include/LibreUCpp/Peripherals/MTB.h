@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) MTB_T
 {
     static constexpr size_t INSTANCE_SIZE = 4096;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 4096;
     static constexpr intptr_t BASE_ADDRESS = 0x41006000;
 
     static constexpr intptr_t ADDR_OFFSET_POSITION = 0x00;
@@ -235,7 +236,7 @@ struct __attribute__((aligned(4), packed)) MTB_T
 
 }; // struct MTB_T
 
-static_assert(sizeof(MTB_T) == MTB_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(MTB_T) == MTB_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp

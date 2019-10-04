@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) FLASH_T
 {
     static constexpr size_t INSTANCE_SIZE = 24;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 24;
     static constexpr intptr_t BASE_ADDRESS = 0x40023c00;
 
     static constexpr intptr_t ADDR_OFFSET_ACR = 0x00;
@@ -213,7 +214,7 @@ struct __attribute__((aligned(4), packed)) FLASH_T
 
 }; // struct FLASH_T
 
-static_assert(sizeof(FLASH_T) == FLASH_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(FLASH_T) == FLASH_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp

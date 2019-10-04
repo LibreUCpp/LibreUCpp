@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) Ethernet_MMC_T
 {
     static constexpr size_t INSTANCE_SIZE = 200;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 200;
     static constexpr intptr_t BASE_ADDRESS = 0x40028100;
 
     static constexpr intptr_t ADDR_OFFSET_MMCCR = 0x00;
@@ -240,7 +241,7 @@ struct __attribute__((aligned(4), packed)) Ethernet_MMC_T
 
 }; // struct Ethernet_MMC_T
 
-static_assert(sizeof(Ethernet_MMC_T) == Ethernet_MMC_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(Ethernet_MMC_T) == Ethernet_MMC_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp

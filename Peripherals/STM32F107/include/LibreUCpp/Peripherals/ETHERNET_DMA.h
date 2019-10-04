@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) ETHERNET_DMA_T
 {
     static constexpr size_t INSTANCE_SIZE = 88;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 88;
     static constexpr intptr_t BASE_ADDRESS = 0x40029000;
 
     static constexpr intptr_t ADDR_OFFSET_DMABMR = 0x00;
@@ -440,7 +441,7 @@ struct __attribute__((aligned(4), packed)) ETHERNET_DMA_T
 
 }; // struct ETHERNET_DMA_T
 
-static_assert(sizeof(ETHERNET_DMA_T) == ETHERNET_DMA_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(ETHERNET_DMA_T) == ETHERNET_DMA_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp

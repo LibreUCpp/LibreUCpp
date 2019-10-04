@@ -9,6 +9,7 @@ namespace Peripherals {
 struct __attribute__((aligned(4), packed)) RTC_T
 {
     static constexpr size_t INSTANCE_SIZE = 29;
+    static constexpr size_t PADDED_INSTANCE_SIZE = 32;
     static constexpr intptr_t BASE_ADDRESS = 0x40001400;
 
     static constexpr intptr_t ADDR_OFFSET_MODE0_CTRL = 0x00;
@@ -890,7 +891,7 @@ struct __attribute__((aligned(4), packed)) RTC_T
     } // clustered register
 }; // struct RTC_T
 
-static_assert(sizeof(RTC_T) == RTC_T::INSTANCE_SIZE, "invalid peripheral register struct");
+static_assert(sizeof(RTC_T) == RTC_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
 
 } // namespace Peripherals
 } // namespace LibreUCpp
