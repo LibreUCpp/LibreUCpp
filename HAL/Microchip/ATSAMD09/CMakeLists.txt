@@ -2,11 +2,15 @@ project(LIBREUCPP_HAL_ATSAMD09 LANGUAGES CXX)
     add_library(${PROJECT_NAME} STATIC)
     target_sources(
         ${PROJECT_NAME} PRIVATE 
+            include/LibreUCpp/HAL/Clock.h
+            include/LibreUCpp/HAL/ClockConfig.h
+            include/LibreUCpp/HAL/DFLL.h src/DFLL.cpp
+            include/LibreUCpp/HAL/DPLL.h src/DPLL.cpp
+            include/LibreUCpp/HAL/GCLK.h
+            include/LibreUCpp/HAL/OSC8M.h
+            include/LibreUCpp/HAL/PM.h src/PM.cpp
             src/Pin.cpp 
             src/Port.cpp 
-            src/DPLL.cpp 
-            src/DFLL.cpp 
-            src/PM.cpp
     )
     target_include_directories(${PROJECT_NAME} PUBLIC include/)
     target_link_libraries(
