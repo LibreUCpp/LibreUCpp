@@ -1,10 +1,15 @@
 project(LIBREUCPP_HAL_ATSAMC21 LANGUAGES CXX)
-    add_library(
-        ${PROJECT_NAME} STATIC
+    add_library(${PROJECT_NAME} STATIC)
+    target_sources(
+        ${PROJECT_NAME} PUBLIC
+        include/LibreUCpp/HAL/Clock.h
+        include/LibreUCpp/HAL/ClockConfig.h
+        include/LibreUCpp/HAL/DPLL.h src/DPLL.cpp
+        include/LibreUCpp/HAL/GCLK.h
+        include/LibreUCpp/HAL/MCLK.h src/MCLK.cpp
+        include/LibreUCpp/HAL/OSC48M.h
         src/Pin.cpp
         src/Port.cpp
-        src/DPLL.cpp
-        src/MCLK.cpp
     )
     target_include_directories(${PROJECT_NAME} PUBLIC include/)
     target_link_libraries(${PROJECT_NAME} PUBLIC LIBREUCPP_HAL_COMMON_MICROCHIP LIBREUCPP_SETTINGS_ATSAMC21 LIBREUCPP_PERIPH_ATSAMC21 LIBREUCPP_HAL_ARM_COMMON)
