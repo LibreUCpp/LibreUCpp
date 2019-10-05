@@ -50,6 +50,8 @@ void UART::Setup(INSTANCE instance, GCLK::GENERATOR generator, RXPAD rxp, TXPAD 
     MCLK::EnableClock(apbclk);
     GCLK::EnablePeripheral(pch, generator);
 
+    _addrIntFlag = _addr + SERCOM_T::ADDR_OFFSET_USART_INT_INTFLAG;
+    _addrData = _addr + SERCOM_T::ADDR_OFFSET_USART_INT_DATA;
     _freq_ref = GCLK::CalcFrequency(generator, clk.GetXosc32kFrequency(), clk.GetXoscFrequency());
     _rxpad = rxp;
     _txpad = txp;

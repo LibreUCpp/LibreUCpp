@@ -85,9 +85,11 @@ class UART
 
     private:
         intptr_t _addr { 0 };
+        intptr_t _addrIntFlag { 0 };
+        intptr_t _addrData { 0 };
         unsigned _freq_ref { 0 };
-        RXPAD _rxpad;
-        TXPAD _txpad;
+        RXPAD _rxpad { RXPAD::RXPO0 };
+        TXPAD _txpad { TXPAD::TXPO0 };
         
         ALWAYS_INLINE SERCOM_T* GetPeriph() 
         {
@@ -104,19 +106,19 @@ class UART
             return reinterpret_cast<CTRLB_T*>(_addr + SERCOM_T::ADDR_OFFSET_USART_INT_CTRLB);
         }
 
+        ALWAYS_INLINE volatile BAUD_T* BAUD()
+        {
+            return reinterpret_cast<BAUD_T*>(_addr + SERCOM_T::ADDR_OFFSET_USART_INT_BAUD);
+        }
+
         ALWAYS_INLINE volatile INTFLAG_T* INTFLAG()
         {
-            return reinterpret_cast<INTFLAG_T*>(_addr + SERCOM_T::ADDR_OFFSET_USART_INT_INTFLAG);
+            return reinterpret_cast<INTFLAG_T*>(_addrIntFlag);
         }
 
         ALWAYS_INLINE volatile DATA_T* DATA()
         {
-            return reinterpret_cast<DATA_T*>(_addr + SERCOM_T::ADDR_OFFSET_USART_INT_DATA);
-        }
-
-        ALWAYS_INLINE volatile BAUD_T* BAUD()
-        {
-            return reinterpret_cast<BAUD_T*>(_addr + SERCOM_T::ADDR_OFFSET_USART_INT_BAUD);
+            return reinterpret_cast<DATA_T*>(_addrData);
         }
 
         ALWAYS_INLINE void WaitSync()
