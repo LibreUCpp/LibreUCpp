@@ -67,9 +67,9 @@ struct __attribute__((aligned(4), packed)) TC_T
     static constexpr intptr_t ADDR_OFFSET_COUNT32_CC = 0x1c;
     static constexpr intptr_t ADDR_OFFSET_COUNT32_CCBUF = 0x30;
 
-    union // clustered register
+    union CLUSTER_T // clustered register
     {
-        struct __attribute__((packed)) // Cluster COUNT8
+        struct __attribute__((packed)) COUNT8_T // Cluster COUNT8
         {
         
             volatile union COUNT8_CTRLA_T // COUNT8_CTRLA: Control A 
@@ -504,7 +504,7 @@ struct __attribute__((aligned(4), packed)) TC_T
 
         } COUNT8;
 
-        struct __attribute__((packed)) // Cluster COUNT16
+        struct __attribute__((packed)) COUNT16_T // Cluster COUNT16
         {
         
             volatile union COUNT16_CTRLA_T // COUNT16_CTRLA: Control A 
@@ -913,7 +913,7 @@ struct __attribute__((aligned(4), packed)) TC_T
 
         } COUNT16;
 
-        struct __attribute__((packed)) // Cluster COUNT32
+        struct __attribute__((packed)) COUNT32_T // Cluster COUNT32
         {
         
             volatile union COUNT32_CTRLA_T // COUNT32_CTRLA: Control A 
@@ -1322,7 +1322,7 @@ struct __attribute__((aligned(4), packed)) TC_T
 
         } COUNT32;
 
-    } // clustered register
+    } CLUSTER; // clustered register
 }; // struct TC0_T
 
 static_assert(sizeof(TC_T) == TC_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");

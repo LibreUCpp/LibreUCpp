@@ -56,9 +56,9 @@ struct __attribute__((aligned(4), packed)) SERCOM_T
     static constexpr intptr_t ADDR_OFFSET_USART_DATA = 0x28;
     static constexpr intptr_t ADDR_OFFSET_USART_DBGCTRL = 0x30;
 
-    union // clustered register
+    union CLUSTER_T // clustered register
     {
-        struct __attribute__((packed)) // Cluster I2CM
+        struct __attribute__((packed)) I2CM_T // Cluster I2CM
         {
         
             volatile union I2CM_CTRLA_T // I2CM_CTRLA: I2CM Control A 
@@ -385,7 +385,7 @@ struct __attribute__((aligned(4), packed)) SERCOM_T
 
         } I2CM;
 
-        struct __attribute__((packed)) // Cluster I2CS
+        struct __attribute__((packed)) I2CS_T // Cluster I2CS
         {
         
             volatile union I2CS_CTRLA_T // I2CS_CTRLA: I2CS Control A 
@@ -677,7 +677,7 @@ struct __attribute__((aligned(4), packed)) SERCOM_T
 
         } I2CS;
 
-        struct __attribute__((packed)) // Cluster SPI
+        struct __attribute__((packed)) SPI_T // Cluster SPI
         {
         
             volatile union SPI_CTRLA_T // SPI_CTRLA: SPI Control A 
@@ -979,7 +979,7 @@ struct __attribute__((aligned(4), packed)) SERCOM_T
 
         } SPI;
 
-        struct __attribute__((packed)) // Cluster USART
+        struct __attribute__((packed)) USART_T // Cluster USART
         {
         
             volatile union USART_CTRLA_T // USART_CTRLA: USART Control A 
@@ -1333,7 +1333,7 @@ struct __attribute__((aligned(4), packed)) SERCOM_T
 
         } USART;
 
-    } // clustered register
+    } CLUSTER; // clustered register
 }; // struct SERCOM0_T
 
 static_assert(sizeof(SERCOM_T) == SERCOM_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");

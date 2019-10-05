@@ -42,15 +42,15 @@ struct __attribute__((aligned(4), packed)) {{ periph.unified_name }}_T
     static constexpr intptr_t ADDR_OFFSET_{{name}} = {{ '0x%02x' % offset }};
 {%- endfor %}
 {% if periph.clusters %}
-    union // clustered register
+    union CLUSTER_T // clustered register
     {
 {%- for cluster in periph.clusters %}
-        struct __attribute__((packed)) // Cluster {{ cluster.name }}
+        struct __attribute__((packed)) {{ cluster.name }}_T // Cluster {{ cluster.name }}
         {
         {{ register_fields(cluster)|indent(width=8) }}
         } {{ cluster.name }};
 {% endfor %}
-    } // clustered register
+    } CLUSTER; // clustered register
 {%- else -%}
     {{ register_fields(periph) }}
 {%- endif %}

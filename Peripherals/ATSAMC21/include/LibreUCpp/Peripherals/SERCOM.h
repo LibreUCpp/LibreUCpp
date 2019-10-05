@@ -86,9 +86,9 @@ struct __attribute__((aligned(4), packed)) SERCOM_T
     static constexpr intptr_t ADDR_OFFSET_USART_INT_DATA = 0x28;
     static constexpr intptr_t ADDR_OFFSET_USART_INT_DBGCTRL = 0x30;
 
-    union // clustered register
+    union CLUSTER_T // clustered register
     {
-        struct __attribute__((packed)) // Cluster I2CM
+        struct __attribute__((packed)) I2CM_T // Cluster I2CM
         {
         
             volatile union I2CM_CTRLA_T // I2CM_CTRLA: I2CM Control A 
@@ -415,7 +415,7 @@ struct __attribute__((aligned(4), packed)) SERCOM_T
 
         } I2CM;
 
-        struct __attribute__((packed)) // Cluster I2CS
+        struct __attribute__((packed)) I2CS_T // Cluster I2CS
         {
         
             volatile union I2CS_CTRLA_T // I2CS_CTRLA: I2CS Control A 
@@ -707,7 +707,7 @@ struct __attribute__((aligned(4), packed)) SERCOM_T
 
         } I2CS;
 
-        struct __attribute__((packed)) // Cluster SPIS
+        struct __attribute__((packed)) SPIS_T // Cluster SPIS
         {
         
             volatile union SPIS_CTRLA_T // SPIS_CTRLA: SPIS Control A 
@@ -1009,7 +1009,7 @@ struct __attribute__((aligned(4), packed)) SERCOM_T
 
         } SPIS;
 
-        struct __attribute__((packed)) // Cluster SPIM
+        struct __attribute__((packed)) SPIM_T // Cluster SPIM
         {
         
             volatile union SPIM_CTRLA_T // SPIM_CTRLA: SPIM Control A 
@@ -1311,7 +1311,7 @@ struct __attribute__((aligned(4), packed)) SERCOM_T
 
         } SPIM;
 
-        struct __attribute__((packed)) // Cluster USART_EXT
+        struct __attribute__((packed)) USART_EXT_T // Cluster USART_EXT
         {
         
             volatile union USART_EXT_CTRLA_T // USART_EXT_CTRLA: USART_EXT Control A 
@@ -1695,7 +1695,7 @@ struct __attribute__((aligned(4), packed)) SERCOM_T
 
         } USART_EXT;
 
-        struct __attribute__((packed)) // Cluster USART_INT
+        struct __attribute__((packed)) USART_INT_T // Cluster USART_INT
         {
         
             volatile union USART_INT_CTRLA_T // USART_INT_CTRLA: USART_INT Control A 
@@ -2079,7 +2079,7 @@ struct __attribute__((aligned(4), packed)) SERCOM_T
 
         } USART_INT;
 
-    } // clustered register
+    } CLUSTER; // clustered register
 }; // struct SERCOM0_T
 
 static_assert(sizeof(SERCOM_T) == SERCOM_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");

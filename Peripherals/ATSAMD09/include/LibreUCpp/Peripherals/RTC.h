@@ -48,9 +48,9 @@ struct __attribute__((aligned(4), packed)) RTC_T
     static constexpr intptr_t ADDR_OFFSET_MODE2_ALARM = 0x18;
     static constexpr intptr_t ADDR_OFFSET_MODE2_MASK = 0x1c;
 
-    union // clustered register
+    union CLUSTER_T // clustered register
     {
-        struct __attribute__((packed)) // Cluster MODE0
+        struct __attribute__((packed)) MODE0_T // Cluster MODE0
         {
         
             volatile union MODE0_CTRL_T // MODE0_CTRL: MODE0 Control 
@@ -301,7 +301,7 @@ struct __attribute__((aligned(4), packed)) RTC_T
 
         } MODE0;
 
-        struct __attribute__((packed)) // Cluster MODE1
+        struct __attribute__((packed)) MODE1_T // Cluster MODE1
         {
         
             volatile union MODE1_CTRL_T // MODE1_CTRL: MODE1 Control 
@@ -579,7 +579,7 @@ struct __attribute__((aligned(4), packed)) RTC_T
 
         } MODE1;
 
-        struct __attribute__((packed)) // Cluster MODE2
+        struct __attribute__((packed)) MODE2_T // Cluster MODE2
         {
         
             volatile union MODE2_CTRL_T // MODE2_CTRL: MODE2 Control 
@@ -888,7 +888,7 @@ struct __attribute__((aligned(4), packed)) RTC_T
 
         } MODE2;
 
-    } // clustered register
+    } CLUSTER; // clustered register
 }; // struct RTC_T
 
 static_assert(sizeof(RTC_T) == RTC_T::PADDED_INSTANCE_SIZE, "invalid peripheral register struct");
