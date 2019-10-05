@@ -104,14 +104,22 @@ unsigned UART::CalcBAUD(unsigned baudrate, unsigned refFrequency)
     return 65536 - ((65536*baudrate) / (refFrequency/16));
 }
 
+uint16_t UART::ReadChar()
+{
+    while (!IsRxDataAvail());
+    return static_cast<uint16_t>(DATA()->reg);
+}
+
 void UART::WriteChar(uint16_t ch)
 {
     DATA()->reg = ch;
     while (!IsTxComplete());
 }
 
-uint16_t UART::ReadChar()
+void UART::WriteString(const char* data)
 {
-    while (!IsRxDataAvail());
-    return static_cast<uint16_t>(DATA()->reg);
+    while (*data != 0)
+    {
+        WriteChar(*data++);
+    }
 }

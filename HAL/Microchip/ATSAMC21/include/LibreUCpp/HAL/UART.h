@@ -70,8 +70,10 @@ class UART
     public:
         void Setup(INSTANCE instance, GCLK::GENERATOR generator, RXPAD rxp, TXPAD txp, const Clock& clk);
         void Init(unsigned baudrate, BITS bits, PARITY parity, STOP_BITS stopBits);
-        void WriteChar(uint16_t ch);
+
         uint16_t ReadChar();
+        void WriteChar(uint16_t ch);
+        void WriteString(const char* data);
 
         ALWAYS_INLINE bool IsRxDataAvail()
         {
