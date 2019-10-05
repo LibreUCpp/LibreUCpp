@@ -64,9 +64,9 @@ struct ClockConfig
                 DPLL::REFCLK::XOSC,
                 ClockConfigTypes::DPLL_XOSC_CLOCK_DIVIDER { 7 }, // XOSC/(2*(7+1)) : 1MHz
 
-                MCLK::CPUDIV::DIV2,
+                MCLK::CPUDIV::DIV1,
 
-                ClockConfigTypes::GCLK_DIVISION_FACTOR { 1 },
+                ClockConfigTypes::GCLK_DIVISION_FACTOR { 2 },
                 GCLK::DIV_MODE::DIV_BY_FACTOR,
                 GCLK::CLOCK_SOURCE::DPLL96M,
                 GCLK::IMPROVE_DUTY_CYCLE::ENABLE,
@@ -98,9 +98,9 @@ struct ClockConfig
                 DPLL::REFCLK::XOSC32K,
                 ClockConfigTypes::DPLL_XOSC_CLOCK_DIVIDER { 1 },
 
-                MCLK::CPUDIV::DIV2,
+                MCLK::CPUDIV::DIV1,
 
-                ClockConfigTypes::GCLK_DIVISION_FACTOR { 1 },
+                ClockConfigTypes::GCLK_DIVISION_FACTOR { 2 },
                 GCLK::DIV_MODE::DIV_BY_FACTOR,
                 GCLK::CLOCK_SOURCE::DPLL96M,
                 GCLK::IMPROVE_DUTY_CYCLE::ENABLE,

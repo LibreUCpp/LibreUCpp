@@ -56,12 +56,14 @@ class GCLK
             EVSYS_CHANNEL_9 = 15, // EVSYS_CHANNEL_9
             EVSYS_CHANNEL_10 = 16, // EVSYS_CHANNEL_10
             EVSYS_CHANNEL_11 = 17, // EVSYS_CHANNEL_11
-            SERCOM0123_SLOW = 18, // SERCOM[0,1,2,3]_SLOW
+            SERCOM0123_SLOW = 18, // SERCOM[0,1,2,3,4]_SLOW
             SERCOM0_CORE = 19, // SERCOM0_CORE
             SERCOM1_CORE = 20, // SERCOM1_CORE
             SERCOM2_CORE = 21, // SERCOM2_CORE
             SERCOM3_CORE = 22, // SERCOM3_CORE
-            SERCOM5_SLOW = 24, // 25 GCLK_SERCOM5_CORE SERCOM5_CORE
+            SERCOM4_CORE = 23, // SERCOM4_CORE
+            SERCOM5_SLOW = 24, // SERCOM5_SLOW
+            SERCOM5_CORE = 25, // SERCOM5_CORE
             CAN0 = 26, // CAN0
             CAN1 = 27, // CAN1
             TCC0 = 28, // GCLK_TCC1 TCC0,TCC1
