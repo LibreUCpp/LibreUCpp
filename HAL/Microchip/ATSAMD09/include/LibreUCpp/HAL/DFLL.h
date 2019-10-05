@@ -115,6 +115,11 @@ class DFLL
 
         static unsigned GetReferenceClockFrequency(unsigned xosc32kFrequency, unsigned xoscFrequency);
 
+        static ALWAYS_INLINE void WaitReady()
+        {
+            while (!GetPeriph().PCLKSR.bit.DFLLRDY);
+        }
+
     private:
         using SYSCTRL_T = Peripherals::SYSCTRL_T;
         using DFLLCTRL_T = SYSCTRL_T::DFLLCTRL_T;

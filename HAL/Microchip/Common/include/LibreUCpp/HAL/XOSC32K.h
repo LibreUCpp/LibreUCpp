@@ -1,7 +1,12 @@
 #pragma once
 
 #include <LibreUCpp/Compiler.h>
+#ifdef LIBREUCPP_ATSAMC
 #include <LibreUCpp/Peripherals/OSC32KCTRL.h>
+#endif
+#ifdef LIBREUCPP_ATSAMD
+#include <LibreUCpp/Peripherals/SYSCTRL.h>
+#endif
 
 namespace LibreUCpp {
 namespace HAL {

@@ -11,10 +11,10 @@ class OSC8M
     public:
         enum class PRESCALER : unsigned char
         {
-            DIV_BY_1 = 0,
-            DIV_BY_2 = 1,
-            DIV_BY_4 = 2,
-            DIV_BY_8 = 3,
+            DIV_8_MHZ = 0,
+            DIV_4_MHZ = 1,
+            DIV_2_MHZ = 2,
+            DIV_1_MHZ = 3,
         };
 
     public:

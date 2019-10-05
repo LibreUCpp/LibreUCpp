@@ -30,6 +30,10 @@ int main()
     clk.Configure(ClockConfig::Get48MHzFrom16MHzCrystal());
     Pin led { Port::A[28] };
 #endif
+#ifdef ADAFRUIT_ATSAMD09_BREAKOUT
+    clk.Configure48MHzFromOSC8M();
+    Pin led { Port::A[27] };
+#endif
 
     Systick::SetFrequency(clk, 1000);
     Systick::EnableInterrupt();
