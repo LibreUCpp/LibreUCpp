@@ -103,12 +103,12 @@ class XOSC
         static constexpr intptr_t ADDR_STATUS = OSCCTRL_T::BASE_ADDRESS + OSCCTRL_T::ADDR_OFFSET_STATUS;
 #endif
 
-        static ALWAYS_INLINE CTRL_T& CTRL()
+        static volatile ALWAYS_INLINE CTRL_T& CTRL()
         {
             return *reinterpret_cast<CTRL_T*>(ADDR_CTRL);
         }
 
-        static ALWAYS_INLINE STATUS_T& STATUS()
+        static volatile ALWAYS_INLINE STATUS_T& STATUS()
         {
             return *reinterpret_cast<STATUS_T*>(ADDR_STATUS);
         }
