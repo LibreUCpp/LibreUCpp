@@ -162,13 +162,13 @@ class Pin
         void EnableEventAction(unsigned eventId, EventAction action, unsigned pinNumber)
         {
             uint32_t data = (0x80 | (static_cast<unsigned>(action) << 4) | (pinNumber & 0x1F)) << (8*eventId);
-            uint32_t mask = ~(0xFF << (8*eventId));
+            uint32_t mask = ~(0xFFu << (8u*eventId));
             GetPort()->EVCTRL.reg = (GetPort()->EVCTRL.reg & mask) | data;
         }
 
         void DisableEventAction(unsigned eventId)
         {
-            GetPort()->EVCTRL.reg &= ~(0x80 << 8*eventId);
+            GetPort()->EVCTRL.reg &= ~(0x80u << 8u*eventId);
         }
 #endif
 
