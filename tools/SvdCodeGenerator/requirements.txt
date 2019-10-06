@@ -1,2 +1,4 @@
 git+https://github.com/posborne/cmsis-svd.git#egg=cmsis-svd&subdirectory=python
 jinja2
+pyyaml
+humanfriendly
