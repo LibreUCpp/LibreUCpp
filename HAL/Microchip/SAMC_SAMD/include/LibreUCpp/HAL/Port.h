@@ -11,13 +11,17 @@ namespace HAL {
 class Port
 {
     public:
+#ifdef LIBREUCPP_HAL_HAS_PORTA
         static Port A;
-#ifndef ATSAMD09
-        static Port B; // TODO only variants G/J/N
-        static Port C; // TODO only variant N
+#endif
+#ifdef LIBREUCPP_HAL_HAS_PORTB
+        static Port B;
+#endif
+#ifdef LIBREUCPP_HAL_HAS_PORTC
+        static Port C;
 #endif
 
-#ifdef ATSAMD09
+#ifdef LIBREUCPP_ATSAMD
         Port(intptr_t addr)
         {
             (void) addr;
@@ -49,7 +53,7 @@ class Port
         }
 
     private:
-#ifdef ATSAMD09
+#ifdef LIBREUCPP_ATSAMD
         static constexpr intptr_t _addr = Peripherals::PORT_T::BASE_ADDRESS_PORT;
 #else
         intptr_t _addr;
