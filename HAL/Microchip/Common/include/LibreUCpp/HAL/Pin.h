@@ -27,7 +27,7 @@ class Pin
             PULL_UP = 1,
         };
 
-#ifdef ATSAMC21
+#ifdef LIBREUCPP_ATSAMC
         enum class EventAction : uint32_t
         {
             OUT = 0x00,
@@ -38,7 +38,7 @@ class Pin
 #endif
 
     public: // constructor
-#ifdef ATSAMD09
+#ifdef LIBREUCPP_ATSAMD
         constexpr Pin(intptr_t portAddr, unsigned pinNumber)
             : _pinMask { 1ul << pinNumber }
         {
@@ -158,7 +158,7 @@ class Pin
             GetPort()->PINCFG[PinNum()].bit.INEN = 0;
         }
 
-#ifdef ATSAMC21
+#ifdef LIBREUCPP_ATSAMC
         void EnableEventAction(unsigned eventId, EventAction action, unsigned pinNumber)
         {
             uint32_t data = (0x80 | (static_cast<unsigned>(action) << 4) | (pinNumber & 0x1F)) << (8*eventId);
@@ -180,7 +180,7 @@ class Pin
             return static_cast<uint32_t>(__builtin_ctz(_pinMask));
         }
 
-#ifdef ATSAMD09
+#ifdef LIBREUCPP_ATSAMD
         static constexpr intptr_t _addr = Peripherals::PORT_T::BASE_ADDRESS_PORT;
 #else
         const intptr_t _addr;

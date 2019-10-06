@@ -34,47 +34,6 @@ class PM
             DIV_BY_128 = 7,
         };
 
-        enum class AHB_CLOCK : unsigned char
-        {
-            HPB0 = 0,
-            HPB1 = 1,
-            HPB2 = 2,
-            DSU  = 3,
-            NVMCTRL = 4,
-            DMAC = 5
-        };
-
-        enum class APBA_CLOCK : unsigned char
-        {
-            PAC0 = 0,
-            PM = 1,
-            SYSCTRL = 2,
-            GCLK  = 3,
-            WDT = 4,
-            RTC = 5,
-            EIC = 6
-        };
-
-        enum class APBB_CLOCK : unsigned char
-        {
-            PAC1 = 0,
-            DSU = 1,
-            NVMCTRL = 2,
-            PORT = 3,
-            DMAC = 4
-        };
-
-        enum class APBC_CLOCK : unsigned char
-        {
-            PAC2 = 0,
-            EVSYS = 1,
-            SERCOM0 = 2,
-            SERCOM1 = 3,
-            TC1 = 6,
-            TC2 = 7,
-            ADC = 8
-        };
-
     public:
         static void ConfigureIdleMode(IDLE_MODE mode)
         {
@@ -106,46 +65,6 @@ class PM
         static void SetAPBCPrescaler(PRESCALER prescaler)
         {
             GetPeriph().APBCSEL.reg = static_cast<unsigned>(prescaler);
-        }
-
-        static void EnableClock(AHB_CLOCK clk)
-        {
-            GetPeriph().AHBMASK.reg |= (1u << static_cast<unsigned>(clk));
-        }
-
-        static void EnableClock(APBA_CLOCK clk)
-        {
-            GetPeriph().APBAMASK.reg |= (1u << static_cast<unsigned>(clk));
-        }
-
-        static void EnableClock(APBB_CLOCK clk)
-        {
-            GetPeriph().APBBMASK.reg |= (1u << static_cast<unsigned>(clk));
-        }
-
-        static void EnableClock(APBC_CLOCK clk)
-        {
-            GetPeriph().APBCMASK.reg |= (1u << static_cast<unsigned>(clk));
-        }
-
-        static void DisableClock(AHB_CLOCK clk)
-        {
-            GetPeriph().AHBMASK.reg &= ~(1u << static_cast<unsigned>(clk));
-        }
-
-        static void DisableClock(APBA_CLOCK clk)
-        {
-            GetPeriph().APBAMASK.reg &= ~(1u << static_cast<unsigned>(clk));
-        }
-
-        static void DisableClock(APBB_CLOCK clk)
-        {
-            GetPeriph().APBBMASK.reg &= ~(1u << static_cast<unsigned>(clk));
-        }
-
-        static void DisableClock(APBC_CLOCK clk)
-        {
-            GetPeriph().APBCMASK.reg &= ~(1u << static_cast<unsigned>(clk));
         }
 
     private:

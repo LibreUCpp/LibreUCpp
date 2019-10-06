@@ -7,5 +7,6 @@ target_sources(
         include/LibreUCpp/HAL/XOSC.h
         include/LibreUCpp/HAL/XOSC32K.h
         include/LibreUCpp/HAL/NVM.h
+        include/LibreUCpp/HAL/BusClockManager.h
 )
 target_include_directories(${PROJECT_NAME} INTERFACE include/)

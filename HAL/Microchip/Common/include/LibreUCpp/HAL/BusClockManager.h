@@ -1,8 +1,14 @@
 #pragma once
 
-#include <LibreUCpp/Compiler.h>
-#include <LibreUCpp/Peripherals/MCLK.h>
 #include <stdlib.h>
+#include <LibreUCpp/Compiler.h>
+
+#ifdef LIBREUCPP_ATSAMC
+#include <LibreUCpp/Peripherals/MCLK.h>
+#endif
+#ifdef LIBREUCPP_ATSAMD
+#include <LibreUCpp/Peripherals/PM.h>
+#endif
 
 namespace LibreUCpp {
 namespace HAL {
@@ -10,16 +16,16 @@ namespace HAL {
 class BusClockManager
 {
     public:
-        using CLKMGR_T = Peripherals::MCLK_T;
-
-        static constexpr unsigned BASE_ADDRESS = CLKMGR_T::BASE_ADDRESS;
         static constexpr unsigned PREFIX_SHIFT = 8;
-        static constexpr unsigned PREFIX_AHB  = CLKMGR_T::ADDR_OFFSET_AHBMASK  << PREFIX_SHIFT;
-        static constexpr unsigned PREFIX_APBA = CLKMGR_T::ADDR_OFFSET_APBAMASK << PREFIX_SHIFT;
-        static constexpr unsigned PREFIX_APBB = CLKMGR_T::ADDR_OFFSET_APBBMASK << PREFIX_SHIFT;
-        static constexpr unsigned PREFIX_APBC = CLKMGR_T::ADDR_OFFSET_APBCMASK << PREFIX_SHIFT;
-        static constexpr unsigned PREFIX_APBD = CLKMGR_T::ADDR_OFFSET_APBDMASK << PREFIX_SHIFT;
         static constexpr unsigned BIT_MASK = ~(0xFFFFFFFF << PREFIX_SHIFT);
+
+#ifdef LIBREUCPP_ATSAMC
+        static constexpr unsigned BASE_ADDRESS = Peripherals::MCLK_T::BASE_ADDRESS;
+        static constexpr unsigned PREFIX_AHB   = Peripherals::MCLK_T::ADDR_OFFSET_AHBMASK  << PREFIX_SHIFT;
+        static constexpr unsigned PREFIX_APBA  = Peripherals::MCLK_T::ADDR_OFFSET_APBAMASK << PREFIX_SHIFT;
+        static constexpr unsigned PREFIX_APBB  = Peripherals::MCLK_T::ADDR_OFFSET_APBBMASK << PREFIX_SHIFT;
+        static constexpr unsigned PREFIX_APBC  = Peripherals::MCLK_T::ADDR_OFFSET_APBCMASK << PREFIX_SHIFT;
+        static constexpr unsigned PREFIX_APBD  = Peripherals::MCLK_T::ADDR_OFFSET_APBDMASK << PREFIX_SHIFT;
 
         enum class Peripheral : unsigned
         {
@@ -88,6 +94,51 @@ class BusClockManager
             TC6            = PREFIX_APBD + 3,
             TC7            = PREFIX_APBD + 4,
         };
+#endif
+
+#ifdef LIBREUCPP_ATSAMD
+        static constexpr unsigned BASE_ADDRESS = Peripherals::PM_T::BASE_ADDRESS;
+        static constexpr unsigned PREFIX_AHB   = Peripherals::PM_T::ADDR_OFFSET_AHBMASK  << PREFIX_SHIFT;
+        static constexpr unsigned PREFIX_APBA  = Peripherals::PM_T::ADDR_OFFSET_APBAMASK << PREFIX_SHIFT;
+        static constexpr unsigned PREFIX_APBB  = Peripherals::PM_T::ADDR_OFFSET_APBBMASK << PREFIX_SHIFT;
+        static constexpr unsigned PREFIX_APBC  = Peripherals::PM_T::ADDR_OFFSET_APBCMASK << PREFIX_SHIFT;
+
+        enum class Peripheral : unsigned
+        {
+            // AHB
+            HPB0        = PREFIX_AHB + 0,
+            HPB1        = PREFIX_AHB + 1,
+            HPB2        = PREFIX_AHB + 2,
+            DSU_AHB     = PREFIX_AHB + 3,
+            NVMCTRL_AHB = PREFIX_AHB + 4,
+            DMAC_AHB    = PREFIX_AHB + 5,
+
+            // APBA
+            PAC0        = PREFIX_APBA + 0,
+            PM          = PREFIX_APBA + 1,
+            SYSCTRL     = PREFIX_APBA + 2,
+            GCLK        = PREFIX_APBA + 3,
+            WDT         = PREFIX_APBA + 4,
+            RTC         = PREFIX_APBA + 5,
+            EIC         = PREFIX_APBA + 6,
+
+            // APBB
+            PAC1        = PREFIX_APBB + 0,
+            DSU_APB     = PREFIX_APBB + 1,
+            NVMCTRL_APB = PREFIX_APBB + 2,
+            PORT        = PREFIX_APBB + 3,
+            DMAC_APB    = PREFIX_APBB + 4,
+
+            // APBC
+            PAC2        = PREFIX_APBC + 0,
+            EVSYS       = PREFIX_APBC + 1,
+            SERCOM0     = PREFIX_APBC + 2,
+            SERCOM1     = PREFIX_APBC + 3,
+            TC1         = PREFIX_APBC + 6,
+            TC2         = PREFIX_APBC + 7,
+            ADC         = PREFIX_APBC + 8,
+        };
+#endif
 
         static void EnableClock(Peripheral p)
         {
