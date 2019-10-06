@@ -1,1 +1,5 @@
+build
+.vscode
+.venv
 svd/*.svd
+__pycache__
