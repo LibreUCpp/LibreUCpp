@@ -10,22 +10,60 @@ class UART
 {
     private:
         using SERCOM_T = Peripherals::SERCOM_T;
-        using USART_INT_T = SERCOM_T::CLUSTER_T::USART_INT_T;
-        using CTRLA_T = USART_INT_T::USART_INT_CTRLA_T;
-        using CTRLB_T = USART_INT_T::USART_INT_CTRLB_T;
-        using INTFLAG_T = SERCOM_T::CLUSTER_T::USART_INT_T::USART_INT_INTFLAG_T;
-        using DATA_T = SERCOM_T::CLUSTER_T::USART_INT_T::USART_INT_DATA_T;
-        using BAUD_T = SERCOM_T::CLUSTER_T::USART_INT_T::USART_INT_BAUD_T;
+#ifdef LIBREUCPP_ATSAMC
+        using USART_T = SERCOM_T::CLUSTER_T::USART_INT_T;
+        using CTRLA_T = USART_T::USART_INT_CTRLA_T;
+        using CTRLB_T = USART_T::USART_INT_CTRLB_T;
+        using INTFLAG_T = USART_T::USART_INT_INTFLAG_T;
+        using DATA_T = USART_T::USART_INT_DATA_T;
+        using BAUD_T = USART_T::USART_INT_BAUD_T;
+        using SYNCBUSY_T = USART_T::USART_INT_SYNCBUSY_T;
+
+        static constexpr intptr_t ADDR_OFFSET_CTRLA    = SERCOM_T::ADDR_OFFSET_USART_INT_CTRLA;
+        static constexpr intptr_t ADDR_OFFSET_CTRLB    = SERCOM_T::ADDR_OFFSET_USART_INT_CTRLB;
+        static constexpr intptr_t ADDR_OFFSET_BAUD     = SERCOM_T::ADDR_OFFSET_USART_INT_BAUD;
+        static constexpr intptr_t ADDR_OFFSET_DATA     = SERCOM_T::ADDR_OFFSET_USART_INT_DATA;
+        static constexpr intptr_t ADDR_OFFSET_INTFLAG  = SERCOM_T::ADDR_OFFSET_USART_INT_INTFLAG;
+        static constexpr intptr_t ADDR_OFFSET_SYNCBUSY = SERCOM_T::ADDR_OFFSET_USART_INT_SYNCBUSY;
+#endif
+#ifdef LIBREUCPP_ATSAMD
+        using USART_T = SERCOM_T::CLUSTER_T::USART_T;
+        using CTRLA_T = USART_T::USART_CTRLA_T;
+        using CTRLB_T = USART_T::USART_CTRLB_T;
+        using INTFLAG_T = USART_T::USART_INTFLAG_T;
+        using DATA_T = USART_T::USART_DATA_T;
+        using BAUD_T = USART_T::USART_BAUD_T;
+        using SYNCBUSY_T = USART_T::USART_SYNCBUSY_T;
+
+        static constexpr intptr_t ADDR_OFFSET_CTRLA    = SERCOM_T::ADDR_OFFSET_USART_CTRLA;
+        static constexpr intptr_t ADDR_OFFSET_CTRLB    = SERCOM_T::ADDR_OFFSET_USART_CTRLB;
+        static constexpr intptr_t ADDR_OFFSET_BAUD     = SERCOM_T::ADDR_OFFSET_USART_BAUD;
+        static constexpr intptr_t ADDR_OFFSET_DATA     = SERCOM_T::ADDR_OFFSET_USART_DATA;
+        static constexpr intptr_t ADDR_OFFSET_INTFLAG  = SERCOM_T::ADDR_OFFSET_USART_INTFLAG;
+        static constexpr intptr_t ADDR_OFFSET_SYNCBUSY = SERCOM_T::ADDR_OFFSET_USART_SYNCBUSY;
+#endif
 
     public:
         enum class INSTANCE : unsigned char
         {
+#ifdef LIBREUCPP_HAL_HAS_SERCOM0
             SERCOM0 = 0,
+#endif
+#ifdef LIBREUCPP_HAL_HAS_SERCOM1
             SERCOM1 = 1,
+#endif
+#ifdef LIBREUCPP_HAL_HAS_SERCOM2
             SERCOM2 = 2,
+#endif
+#ifdef LIBREUCPP_HAL_HAS_SERCOM3
             SERCOM3 = 3,
+#endif
+#ifdef LIBREUCPP_HAL_HAS_SERCOM4
             SERCOM4 = 4,
+#endif
+#ifdef LIBREUCPP_HAL_HAS_SERCOM5
             SERCOM5 = 5
+#endif
         };
 
         enum class RXPAD : unsigned char
@@ -93,24 +131,19 @@ class UART
         RXPAD _rxpad { RXPAD::RXPO0 };
         TXPAD _txpad { TXPAD::TXPO0 };
         
-        ALWAYS_INLINE SERCOM_T* GetPeriph() 
-        {
-            return reinterpret_cast<Peripherals::SERCOM_T*>(_addr);
-        }
-
         ALWAYS_INLINE volatile CTRLA_T* CTRLA()
         {
-            return reinterpret_cast<CTRLA_T*>(_addr + SERCOM_T::ADDR_OFFSET_USART_INT_CTRLA);
+            return reinterpret_cast<CTRLA_T*>(_addr + ADDR_OFFSET_CTRLA);
         }
 
         ALWAYS_INLINE volatile CTRLB_T* CTRLB()
         {
-            return reinterpret_cast<CTRLB_T*>(_addr + SERCOM_T::ADDR_OFFSET_USART_INT_CTRLB);
+            return reinterpret_cast<CTRLB_T*>(_addr + ADDR_OFFSET_CTRLB);
         }
 
         ALWAYS_INLINE volatile BAUD_T* BAUD()
         {
-            return reinterpret_cast<BAUD_T*>(_addr + SERCOM_T::ADDR_OFFSET_USART_INT_BAUD);
+            return reinterpret_cast<BAUD_T*>(_addr + ADDR_OFFSET_BAUD);
         }
 
         ALWAYS_INLINE volatile INTFLAG_T* INTFLAG()
@@ -123,9 +156,14 @@ class UART
             return reinterpret_cast<DATA_T*>(_addrData);
         }
 
+        ALWAYS_INLINE volatile SYNCBUSY_T* SYNCBUSY()
+        {
+            return reinterpret_cast<SYNCBUSY_T*>(_addr + ADDR_OFFSET_SYNCBUSY);
+        }
+
         ALWAYS_INLINE void WaitSync()
         {
-            while (GetPeriph()->CLUSTER.USART_INT.USART_INT_SYNCBUSY.reg);
+            while (SYNCBUSY()->reg);
         }
 
         static unsigned CalcBAUD(unsigned baudrate, unsigned freq_ref);

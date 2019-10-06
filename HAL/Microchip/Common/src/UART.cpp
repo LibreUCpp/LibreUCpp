@@ -13,36 +13,48 @@ void UART::Setup(INSTANCE instance, GCLK::GENERATOR generator, RXPAD rxp, TXPAD 
 
     switch (instance)
     {
+#ifdef LIBREUCPP_HAL_HAS_SERCOM0
         case INSTANCE::SERCOM0:
             _addr = SERCOM_T::BASE_ADDRESS_SERCOM0;
             busclock = BusClockManager::Peripheral::SERCOM0;
             pch = GCLK::PERIPHERAL_CHANNEL::SERCOM0_CORE;
             break;
+#endif
+#ifdef LIBREUCPP_HAL_HAS_SERCOM1
         case INSTANCE::SERCOM1:
             _addr = SERCOM_T::BASE_ADDRESS_SERCOM1;
             busclock = BusClockManager::Peripheral::SERCOM1;
             pch = GCLK::PERIPHERAL_CHANNEL::SERCOM1_CORE;
             break;
+#endif
+#ifdef LIBREUCPP_HAL_HAS_SERCOM2
         case INSTANCE::SERCOM2:
             _addr = SERCOM_T::BASE_ADDRESS_SERCOM2;
             busclock = BusClockManager::Peripheral::SERCOM2;
             pch = GCLK::PERIPHERAL_CHANNEL::SERCOM2_CORE;
             break;
+#endif
+#ifdef LIBREUCPP_HAL_HAS_SERCOM3
         case INSTANCE::SERCOM3:
             _addr = SERCOM_T::BASE_ADDRESS_SERCOM3;
             busclock = BusClockManager::Peripheral::SERCOM3;
             pch = GCLK::PERIPHERAL_CHANNEL::SERCOM3_CORE;
             break;
+#endif
+#ifdef LIBREUCPP_HAL_HAS_SERCOM4
         case INSTANCE::SERCOM4:
             _addr = SERCOM_T::BASE_ADDRESS_SERCOM4;
             busclock = BusClockManager::Peripheral::SERCOM4;
             pch = GCLK::PERIPHERAL_CHANNEL::SERCOM4_CORE;
             break;
+#endif
+#ifdef LIBREUCPP_HAL_HAS_SERCOM5
         case INSTANCE::SERCOM5:
             _addr = SERCOM_T::BASE_ADDRESS_SERCOM5;
             busclock = BusClockManager::Peripheral::SERCOM5;
             pch = GCLK::PERIPHERAL_CHANNEL::SERCOM5_CORE;
             break;
+#endif
         default:
             abort();
     }
@@ -50,8 +62,8 @@ void UART::Setup(INSTANCE instance, GCLK::GENERATOR generator, RXPAD rxp, TXPAD 
     BusClockManager::EnableClock(busclock);
     GCLK::EnablePeripheral(pch, generator);
 
-    _addrIntFlag = _addr + SERCOM_T::ADDR_OFFSET_USART_INT_INTFLAG;
-    _addrData = _addr + SERCOM_T::ADDR_OFFSET_USART_INT_DATA;
+    _addrIntFlag = _addr + ADDR_OFFSET_INTFLAG;
+    _addrData = _addr + ADDR_OFFSET_DATA;
     _freq_ref = GCLK::CalcFrequency(generator, clk.GetXosc32kFrequency(), clk.GetXoscFrequency());
     _rxpad = rxp;
     _txpad = txp;

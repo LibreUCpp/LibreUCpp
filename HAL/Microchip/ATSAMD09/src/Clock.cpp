@@ -24,7 +24,7 @@ void Clock::Configure48MHzFromOSC8M()
         GCLK::ENABLE_OUTPUT::DISABLE,
         GCLK::OUTPUT_OFF_VALUE::LOW
     );
-    GCLK::EnablePeripheral(GCLK::PERIPHERAL_CHANNEL::GCLK_DFLL48M_REF, GCLK::GENERATOR::Generator_1);
+    GCLK::EnablePeripheral(GCLK::PERIPHERAL_CHANNEL::DFLL48M_REF, GCLK::GENERATOR::Generator_1);
 
     DFLL::Configure(
         DFLL::WAITLOCK::DONT_WAIT, 

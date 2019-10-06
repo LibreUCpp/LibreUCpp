@@ -20,6 +20,16 @@ class Clock
             return CalcAHBFrequency();
         }
 
+        unsigned GetXoscFrequency() const
+        {
+            return _xoscFrequency;
+        }
+
+        unsigned GetXosc32kFrequency() const
+        {
+            return _xoscFrequency;
+        }
+        
     private:
         static constexpr unsigned NVM_CALIBRATION_ROW_ADDR { 0x806020 };
         static constexpr unsigned NVM_CALIBRATION_DFLL_BYTE_OFFSET { 4 };

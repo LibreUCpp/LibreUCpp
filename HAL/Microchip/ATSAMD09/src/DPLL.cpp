@@ -14,7 +14,7 @@ unsigned DPLL::GetReferenceClockFrequency(unsigned xosc32kFrequency, unsigned xo
         case REFCLK::XOSC:
             return xoscFrequency / (2u*(GetPeriph().DPLLCTRLB.bit.DIV + 1u));
         case REFCLK::GCLK:
-            gen = GCLK::GetGenerator(GCLK::PERIPHERAL_CHANNEL::GCLK_DPLL);
+            gen = GCLK::GetGenerator(GCLK::PERIPHERAL_CHANNEL::DPLL);
             return GCLK::CalcFrequency(gen, xoscFrequency, xoscFrequency);
         default:
             abort();

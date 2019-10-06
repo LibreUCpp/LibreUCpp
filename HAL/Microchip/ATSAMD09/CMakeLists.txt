@@ -10,8 +10,14 @@ project(LIBREUCPP_HAL_ATSAMD09 LANGUAGES CXX)
             include/LibreUCpp/HAL/PM.h src/PM.cpp
             src/Pin.cpp 
             src/Port.cpp 
+            ../Common/include/LibreUCpp/HAL/UART.h ../Common/src/UART.cpp
     )
     target_include_directories(${PROJECT_NAME} PUBLIC include/)
+    target_compile_definitions(
+        ${PROJECT_NAME} PUBLIC
+        LIBREUCPP_HAL_HAS_SERCOM0
+        LIBREUCPP_HAL_HAS_SERCOM1
+    )
     target_link_libraries(
         ${PROJECT_NAME} PUBLIC 
             LIBREUCPP_HAL_ARM_COMMON

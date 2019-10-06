@@ -25,23 +25,23 @@ class GCLK
 
         enum class PERIPHERAL_CHANNEL : unsigned char
         {
-            GCLK_DFLL48M_REF = 0x0, // DFLL48MReference
-            GCLK_DPLL = 0x1, // FDPLL96M input clock source for reference
-            GCLK_DPLL_32K = 0x2, // FDPLL96M 32kHz clock for FDPLL96M internal lock timer
-            GCLK_WDT = 0x3, // WDT
-            GCLK_RTC = 0x4, // RTC
-            GCLK_EIC = 0x5, // EIC
-            GCLK_EVSYS_CHANNEL_0 = 0x07, // EVSYS_CHANNEL_0
-            GCLK_EVSYS_CHANNEL_1 = 0x08, // EVSYS_CHANNEL_1
-            GCLK_EVSYS_CHANNEL_2 = 0x09, // EVSYS_CHANNEL_2
-            GCLK_EVSYS_CHANNEL_3 = 0x0A, // EVSYS_CHANNEL_3
-            GCLK_EVSYS_CHANNEL_4 = 0x0B, // EVSYS_CHANNEL_4
-            GCLK_EVSYS_CHANNEL_5 = 0x0C, // EVSYS_CHANNEL_5
-            GCLK_SERCOMx_SLOW = 0x0D, // SERCOMx_SLOW
-            GCLK_SERCOM0_CORE = 0x0E, // SERCOM0_CORE
-            GCLK_SERCOM1_CORE = 0X0F, // SERCOM1_CORE
-            GCLK_TC2 = 0x12, // TC2
-            GCLK_ADC = 0x13, // ADC
+            DFLL48M_REF = 0x0, // DFLL48MReference
+            DPLL = 0x1, // FDPLL96M input clock source for reference
+            DPLL_32K = 0x2, // FDPLL96M 32kHz clock for FDPLL96M internal lock timer
+            WDT = 0x3, // WDT
+            RTC = 0x4, // RTC
+            EIC = 0x5, // EIC
+            EVSYS_CHANNEL_0 = 0x07, // EVSYS_CHANNEL_0
+            EVSYS_CHANNEL_1 = 0x08, // EVSYS_CHANNEL_1
+            EVSYS_CHANNEL_2 = 0x09, // EVSYS_CHANNEL_2
+            EVSYS_CHANNEL_3 = 0x0A, // EVSYS_CHANNEL_3
+            EVSYS_CHANNEL_4 = 0x0B, // EVSYS_CHANNEL_4
+            EVSYS_CHANNEL_5 = 0x0C, // EVSYS_CHANNEL_5
+            SERCOMx_SLOW = 0x0D, // SERCOMx_SLOW
+            SERCOM0_CORE = 0x0E, // SERCOM0_CORE
+            SERCOM1_CORE = 0X0F, // SERCOM1_CORE
+            TC2 = 0x12, // TC2
+            ADC = 0x13, // ADC
         };
 
         enum class CLOCK_SOURCE : unsigned char
