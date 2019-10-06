@@ -1,6 +1,6 @@
 #include <LibreUCpp/HAL/UART.h>
 #include <LibreUCpp/HAL/GCLK.h>
-#include <LibreUCpp/HAL/MCLK.h>
+#include <LibreUCpp/HAL/BusClockManager.h>
 #include <LibreUCpp/HAL/Clock.h>
 #include <stdlib.h>
 
@@ -8,46 +8,46 @@ using namespace LibreUCpp::HAL;
 
 void UART::Setup(INSTANCE instance, GCLK::GENERATOR generator, RXPAD rxp, TXPAD txp, const Clock& clk)
 {
-    MCLK::APBC_CLOCK apbclk;
+    BusClockManager::Peripheral busclock;
     GCLK::PERIPHERAL_CHANNEL pch;
 
     switch (instance)
     {
         case INSTANCE::SERCOM0:
             _addr = SERCOM_T::BASE_ADDRESS_SERCOM0;
-            apbclk = MCLK::APBC_CLOCK::SERCOM0;
+            busclock = BusClockManager::Peripheral::SERCOM0;
             pch = GCLK::PERIPHERAL_CHANNEL::SERCOM0_CORE;
             break;
         case INSTANCE::SERCOM1:
             _addr = SERCOM_T::BASE_ADDRESS_SERCOM1;
-            apbclk = MCLK::APBC_CLOCK::SERCOM1;
+            busclock = BusClockManager::Peripheral::SERCOM1;
             pch = GCLK::PERIPHERAL_CHANNEL::SERCOM1_CORE;
             break;
         case INSTANCE::SERCOM2:
             _addr = SERCOM_T::BASE_ADDRESS_SERCOM2;
-            apbclk = MCLK::APBC_CLOCK::SERCOM2;
+            busclock = BusClockManager::Peripheral::SERCOM2;
             pch = GCLK::PERIPHERAL_CHANNEL::SERCOM2_CORE;
             break;
         case INSTANCE::SERCOM3:
             _addr = SERCOM_T::BASE_ADDRESS_SERCOM3;
-            apbclk = MCLK::APBC_CLOCK::SERCOM3;
+            busclock = BusClockManager::Peripheral::SERCOM3;
             pch = GCLK::PERIPHERAL_CHANNEL::SERCOM3_CORE;
             break;
         case INSTANCE::SERCOM4:
             _addr = SERCOM_T::BASE_ADDRESS_SERCOM4;
-            apbclk = MCLK::APBC_CLOCK::SERCOM4;
+            busclock = BusClockManager::Peripheral::SERCOM4;
             pch = GCLK::PERIPHERAL_CHANNEL::SERCOM4_CORE;
             break;
         case INSTANCE::SERCOM5:
             _addr = SERCOM_T::BASE_ADDRESS_SERCOM5;
-            apbclk = MCLK::APBC_CLOCK::SERCOM5;
+            busclock = BusClockManager::Peripheral::SERCOM5;
             pch = GCLK::PERIPHERAL_CHANNEL::SERCOM5_CORE;
             break;
         default:
             abort();
     }
 
-    MCLK::EnableClock(apbclk);
+    BusClockManager::EnableClock(busclock);
     GCLK::EnablePeripheral(pch, generator);
 
     _addrIntFlag = _addr + SERCOM_T::ADDR_OFFSET_USART_INT_INTFLAG;
@@ -61,7 +61,7 @@ void UART::Init(unsigned baudrate, BITS bits, PARITY parity, STOP_BITS stopBits)
 {
     CTRLA()->reg 
         = CTRLA_T::MODE(1) // internal clock
-        | CTRLA_T::CMODE(0) // internal clock
+        | CTRLA_T::CMODE(0) // async communication
         | CTRLA_T::DORD(1) // LSB first
         | CTRLA_T::RXPO(static_cast<unsigned>(_rxpad))
         | CTRLA_T::TXPO(static_cast<unsigned>(_txpad));

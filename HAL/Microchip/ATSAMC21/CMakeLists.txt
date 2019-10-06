@@ -6,6 +6,7 @@ project(LIBREUCPP_HAL_ATSAMC21 LANGUAGES CXX)
         include/LibreUCpp/HAL/ClockConfig.h
         include/LibreUCpp/HAL/DPLL.h src/DPLL.cpp
         include/LibreUCpp/HAL/GCLK.h
+        include/LibreUCpp/HAL/BusClockManager.h
         include/LibreUCpp/HAL/MCLK.h src/MCLK.cpp
         include/LibreUCpp/HAL/OSC48M.h
         include/LibreUCpp/HAL/UART.h src/UART.cpp

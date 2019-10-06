@@ -1,9 +1,9 @@
 #include <LibreUCpp/HAL/Pin.h>
-#include <LibreUCpp/HAL/MCLK.h>
+#include <LibreUCpp/HAL/BusClockManager.h>
 
 using namespace LibreUCpp::HAL;
 
 void Pin::EnablePeripheral()
 {
-    MCLK::EnableClock(MCLK::APBB_CLOCK::PORT);
+    BusClockManager::EnableClock(BusClockManager::Peripheral::PORT);
 }
