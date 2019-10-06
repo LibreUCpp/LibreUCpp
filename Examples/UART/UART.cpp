@@ -36,7 +36,7 @@ int main()
         UART::INSTANCE::SERCOM5, 
         GCLK::GENERATOR::Generator_0,
         UART::RXPAD::RXPO1, UART::TXPAD::TXPO0,
-        clk
+        GCLK::CalcFrequency(GCLK::GENERATOR::Generator_0, clk.GetXosc32kFrequency(), clk.GetXoscFrequency())
     );
 
     uart.Init(115200, UART::BITS::EIGHT, UART::PARITY::NONE, UART::STOP_BITS::ONE);

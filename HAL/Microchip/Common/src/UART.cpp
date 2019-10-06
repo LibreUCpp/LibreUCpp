@@ -6,7 +6,7 @@
 
 using namespace LibreUCpp::HAL;
 
-void UART::Setup(INSTANCE instance, GCLK::GENERATOR generator, RXPAD rxp, TXPAD txp, const Clock& clk)
+void UART::Setup(INSTANCE instance, GCLK::GENERATOR generator, RXPAD rxp, TXPAD txp, unsigned refclk_frequency)
 {
     BusClockManager::Peripheral busclock;
     GCLK::PERIPHERAL_CHANNEL pch;
@@ -64,7 +64,7 @@ void UART::Setup(INSTANCE instance, GCLK::GENERATOR generator, RXPAD rxp, TXPAD 
 
     _addrIntFlag = _addr + ADDR_OFFSET_INTFLAG;
     _addrData = _addr + ADDR_OFFSET_DATA;
-    _freq_ref = GCLK::CalcFrequency(generator, clk.GetXosc32kFrequency(), clk.GetXoscFrequency());
+    _freq_ref = refclk_frequency;
     _rxpad = rxp;
     _txpad = txp;
 }

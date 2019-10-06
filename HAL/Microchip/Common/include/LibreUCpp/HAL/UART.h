@@ -1,7 +1,6 @@
 #include <LibreUCpp/Compiler.h>
 #include <LibreUCpp/Peripherals/SERCOM.h>
 #include <LibreUCpp/HAL/GCLK.h>
-#include <LibreUCpp/HAL/Clock.h>
 
 namespace LibreUCpp {
 namespace HAL {
@@ -106,7 +105,7 @@ class UART
         };
 
     public:
-        void Setup(INSTANCE instance, GCLK::GENERATOR generator, RXPAD rxp, TXPAD txp, const Clock& clk);
+        void Setup(INSTANCE instance, GCLK::GENERATOR generator, RXPAD rxp, TXPAD txp, unsigned refclk_frequency);
         void Init(unsigned baudrate, BITS bits, PARITY parity, STOP_BITS stopBits);
 
         uint16_t ReadChar();
