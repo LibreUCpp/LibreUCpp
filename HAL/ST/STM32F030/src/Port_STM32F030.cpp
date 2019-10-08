@@ -1,4 +1,5 @@
 #include <LibreUCpp/HAL/Port.h>
+#include <LibreUCpp/HAL/BusClockManager.h>
 
 using namespace LibreUCpp::HAL;
 using namespace LibreUCpp::Peripherals;
@@ -15,6 +16,6 @@ void Port::EnablePeripheral()
     unsigned gpio_port_offset = static_cast<unsigned>(_addr - GPIO_T::BASE_ADDRESS_GPIOA);
     unsigned port_index = gpio_port_offset / gpio_port_addr_distance;
 
-    auto rcc = reinterpret_cast<RCC_T*>(RCC_T::BASE_ADDRESS);
-    rcc->AHBENR.reg |= 1u<<(RCC_T::AHBENR_T::IOPAEN_POS + port_index);
+    auto p = static_cast<BusClockManager::Peripheral>(static_cast<unsigned>(BusClockManager::Peripheral::IOPA) + port_index);
+    BusClockManager::EnableClock(p);
 }

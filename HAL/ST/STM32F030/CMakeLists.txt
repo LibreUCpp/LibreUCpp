@@ -1,8 +1,15 @@
 project(LIBREUCPP_HAL_STM32F030xx LANGUAGES CXX)
     add_library(
         ${PROJECT_NAME} STATIC
-        src/Port_STM32F030.cpp
-        ../Common/src/Pin.cpp
+    )
+    target_sources(
+        ${PROJECT_NAME} PUBLIC
+            include/LibreUCpp/HAL/ClockConfig.h
+            include/LibreUCpp/HAL/RCC.h
+            include/LibreUCpp/HAL/BusClockManager.h
+            ../Common/src/Pin.cpp
+            src/Port_STM32F030.cpp
+            
     )
     target_include_directories(${PROJECT_NAME} PUBLIC include/ ../Common/include/)
     target_link_libraries(${PROJECT_NAME} PUBLIC LIBREUCPP_SETTINGS_STM32F030 LIBREUCPP_PERIPH_STM32F030 LIBREUCPP_HAL_ARM_COMMON)
