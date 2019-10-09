@@ -1,3 +1,5 @@
+#pragma once
+
 #include <LibreUCpp/Compiler.h>
 #include <LibreUCpp/Peripherals/SERCOM.h>
 #include <LibreUCpp/HAL/GCLK.h>
