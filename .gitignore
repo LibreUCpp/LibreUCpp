@@ -3,3 +3,4 @@ build
 .venv
 svd/*.svd
 __pycache__
+datasheets
