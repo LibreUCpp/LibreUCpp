@@ -12,6 +12,7 @@ project(LIBREUCPP_HAL_STM32F030xx LANGUAGES CXX)
             include/LibreUCpp/HAL/ClockConfig.h
             include/LibreUCpp/HAL/RCC.h
             include/LibreUCpp/HAL/BusClockManager.h
+            include/LibreUCpp/HAL/UART.h src/UART.cpp
     )
     target_compile_definitions(
         ${PROJECT_NAME} PUBLIC
@@ -20,6 +21,8 @@ project(LIBREUCPP_HAL_STM32F030xx LANGUAGES CXX)
             LIBREUCPP_HAL_HAS_GPIOC
             LIBREUCPP_HAL_HAS_GPIOD
             LIBREUCPP_HAL_HAS_GPIOF
+            LIBREUCPP_HAL_HAS_USART1
+            LIBREUCPP_HAL_HAS_USART2
     )
     target_include_directories(${PROJECT_NAME} PUBLIC include/ ../Common/include/)
     target_link_libraries(${PROJECT_NAME} PUBLIC LIBREUCPP_SETTINGS_STM32F030 LIBREUCPP_PERIPH_STM32F030 LIBREUCPP_HAL_ARM_COMMON)
