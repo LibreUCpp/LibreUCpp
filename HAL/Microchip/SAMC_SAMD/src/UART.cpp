@@ -124,8 +124,8 @@ uint16_t UART::ReadChar()
 
 void UART::WriteChar(uint16_t ch)
 {
+    while (!IsTxReady());
     DATA()->reg = ch;
-    while (!IsTxComplete());
 }
 
 void UART::WriteString(const char* data)

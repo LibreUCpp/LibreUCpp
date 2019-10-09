@@ -119,6 +119,11 @@ class UART
             return INTFLAG()->bit.RXC != 0;
         }
 
+        ALWAYS_INLINE bool IsTxReady()
+        {
+            return INTFLAG()->bit.DRE != 0;
+        }
+
         ALWAYS_INLINE bool IsTxComplete()
         {
             return INTFLAG()->bit.TXC != 0;
