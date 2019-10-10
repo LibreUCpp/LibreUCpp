@@ -27,12 +27,10 @@ int main()
 
     Pin txd { Port::A[9] };
     txd.EnablePeripheral();
-    //txd.SetDirection(Pin::Direction::OUTPUT);
     txd.ConfigureMultiplex(Pin::Mux::AF1);
 
     Pin rxd { Port::A[10] };
     rxd.EnablePeripheral();
-    //rxd.SetDirection(Pin::Direction::INPUT);
     rxd.ConfigureMultiplex(Pin::Mux::AF1);
 
     uart.Setup(UART::INSTANCE::USART1, clk.CalcAHBFrequency());
