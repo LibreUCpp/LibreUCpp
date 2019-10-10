@@ -3,7 +3,7 @@
 
 using namespace LibreUCpp::HAL;
 
-void UART::Setup(INSTANCE instance)
+void UART::Setup(INSTANCE instance, unsigned fclk)
 {
     BusClockManager::Peripheral busclock;
 
@@ -56,17 +56,29 @@ void UART::Setup(INSTANCE instance)
     }
 
     _addrISR = _addr + USART_T::ADDR_OFFSET_ISR;
+    _addrTDR = _addr + USART_T::ADDR_OFFSET_TDR;
+    _addrRDR = _addr + USART_T::ADDR_OFFSET_RDR;
+    _fclk = fclk;
 
     BusClockManager::EnableClock(busclock);
 }
 
 void UART::Init(unsigned baudrate, BITS bits, PARITY parity, STOP_BITS stopBits)
 {
-    // FIXME implement me
-    (void) baudrate;
-    (void) bits;
-    (void) parity;
-    (void) stopBits;
+    using CR1_T = USART_T::CR1_T;
+    using CR2_T = USART_T::CR2_T;
+
+    GetPeriph()->CR1.bit.UE = 0;
+    GetPeriph()->BRR.reg = _fclk / baudrate;
+    GetPeriph()->CR2.reg
+        = CR2_T::STOP(static_cast<unsigned>(stopBits));
+    GetPeriph()->CR1.reg 
+        = CR1_T::M1(static_cast<unsigned>(bits) >> 1)
+        | CR1_T::M(static_cast<unsigned>(bits) & 0x01)
+        | CR1_T::PCE(static_cast<unsigned>(parity)>>1)
+        | CR1_T::PS(static_cast<unsigned>(parity) & 0x01)
+        | CR1_T::TE_MASK | CR1_T::RE_MASK;
+    GetPeriph()->CR1.bit.UE = 1;
 }
 
 uint16_t UART::ReadChar()

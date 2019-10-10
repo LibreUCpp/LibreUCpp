@@ -40,9 +40,9 @@ class UART
 
         enum class PARITY : unsigned char
         {
-            NONE = 2,
-            EVEN = 0,
-            ODD = 1,
+            NONE = 0,
+            EVEN = 2,
+            ODD = 3,
         };
 
         enum class BITS : unsigned char
@@ -58,7 +58,7 @@ class UART
             TWO = 2,
         };
 
-        void Setup(INSTANCE instance);
+        void Setup(INSTANCE instance, unsigned fclk);
         void Init(unsigned baudrate, BITS bits, PARITY parity, STOP_BITS stopBits);
 
         uint16_t ReadChar();
@@ -86,6 +86,12 @@ class UART
         intptr_t _addrISR { 0 };
         intptr_t _addrTDR { 0 };
         intptr_t _addrRDR { 0 };
+        unsigned _fclk { 0 };
+
+        ALWAYS_INLINE volatile USART_T* GetPeriph()
+        {
+            return reinterpret_cast<USART_T*>(_addr);
+        }
 
         ALWAYS_INLINE volatile USART_T::ISR_T* ISR()
         {
