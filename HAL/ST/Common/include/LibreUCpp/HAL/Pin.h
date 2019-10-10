@@ -165,7 +165,7 @@ class Pin
         {
             const unsigned pos = 2 * PinNum();
             const unsigned mask = ~(3ul << pos);
-            Peripheral().MODER.reg = (Peripheral().PUPDR.reg & mask) | (static_cast<uint32_t>(mode) << pos);
+            Peripheral().MODER.reg = (Peripheral().MODER.reg & mask) | (static_cast<uint32_t>(mode) << pos);
         }
 
         inline OutputSpeed GetOutputSpeed();
