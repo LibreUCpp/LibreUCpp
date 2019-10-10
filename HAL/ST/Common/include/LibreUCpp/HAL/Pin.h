@@ -137,14 +137,15 @@ class Pin
         void ConfigureMultiplex(Mux mux)
         {
             const uint32_t pinNum = PinNum();
-            const uint32_t mask = ~(0xFul << (pinNum & 0x07));
+            const uint32_t shift = 4*(pinNum & 0x07);
+            const uint32_t mask = ~(0xFul << shift);
             if (pinNum < 8)
             {                    
-                Peripheral().AFRL.reg = (Peripheral().AFRL.reg & mask) | static_cast<uint32_t>(mux) << pinNum;
+                Peripheral().AFRL.reg = (Peripheral().AFRL.reg & mask) | static_cast<uint32_t>(mux) << shift;
             }
             else
             {
-                Peripheral().AFRH.reg = (Peripheral().AFRH.reg & mask) | static_cast<uint32_t>(mux) << (pinNum-8);
+                Peripheral().AFRH.reg = (Peripheral().AFRH.reg & mask) | static_cast<uint32_t>(mux) << shift;
             }
             SetMode(Mode::ALTERNATE);
         }
