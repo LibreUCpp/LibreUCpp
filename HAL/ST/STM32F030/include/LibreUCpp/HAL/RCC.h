@@ -43,7 +43,7 @@ class PLLInfo_F030
 
         static unsigned GetPLLMultiplicatorValue()
         {
-            return std::max(16u, GetPeriph().CFGR.bit.PLLMUL + 2u);
+            return std::min(16u, GetPeriph().CFGR.bit.PLLMUL + 2u);
         }
 
         static ALWAYS_INLINE Peripherals::RCC_T& GetPeriph()
