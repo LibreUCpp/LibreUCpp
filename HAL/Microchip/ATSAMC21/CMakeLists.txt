@@ -9,6 +9,7 @@ project(LIBREUCPP_HAL_ATSAMC21 LANGUAGES CXX)
             include/LibreUCpp/HAL/GCLK.h
             include/LibreUCpp/HAL/MCLK.h src/MCLK.cpp
             include/LibreUCpp/HAL/OSC48M.h
+            include/LibreUCpp/HAL/ADC.h src/ADC.cpp
             ../SAMC_SAMD/include/LibreUCpp/HAL/Pin.h ../SAMC_SAMD/src/Pin.cpp
             ../SAMC_SAMD/include/LibreUCpp/HAL/Port.h ../SAMC_SAMD/src/Port.cpp
             ../SAMC_SAMD/include/LibreUCpp/HAL/XOSC.h
