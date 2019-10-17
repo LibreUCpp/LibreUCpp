@@ -2,6 +2,7 @@
 
 #include <LibreUCpp/Compiler.h>
 #include <LibreUCpp/Peripherals/ADC.h>
+#include <LibreUCpp/HAL/GCLK.h>
 
 namespace LibreUCpp {
 namespace HAL {
@@ -111,7 +112,7 @@ class ADC
         };
 
     public:
-        void Setup(INSTANCE instance, PRESCALER prescaler, REFSEL refsel, RESOLUTION resolution, DIFFMODE diffmode, ACCUMULATION accumulation);
+        void Setup(INSTANCE instance, GCLK::GENERATOR generator, PRESCALER prescaler, REFSEL refsel, RESOLUTION resolution, DIFFMODE diffmode, ACCUMULATION accumulation);
 
     public:
         using CHANNEL = MUXPOS;
@@ -195,11 +196,6 @@ class ADC
         ALWAYS_INLINE volatile INPUTCTRL_T* INPUTCTRL()
         {
             return reinterpret_cast<INPUTCTRL_T*>(_addr + ADC_T::ADDR_OFFSET_INPUTCTRL);
-        }
-
-        ALWAYS_INLINE void WaitBusy()
-        {
-            while (SYNCBUSY()->reg != 0);
         }
 
         void Reset();
