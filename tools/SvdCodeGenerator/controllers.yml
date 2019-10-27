@@ -70,14 +70,10 @@ STM32F030:
   renames:
     GPIOA: GPIO
     USART1: USART
-    UART4: UART
-    UART5: UART
     SPI1: SPI
-    I2S2ext: SPI
     I2C1: I2C
     CAN1: CAN
     DMA1: DMA
-    SAI1: SAI
     Flash: FLASH
   variants:
     STM32F030X4:
@@ -111,7 +107,6 @@ STM32F072:
   renames:
     GPIOA: GPIO
     USART1: USART
-    UART4: UART
     SPI1: SPI
     I2C1: I2C
     CAN1: CAN
