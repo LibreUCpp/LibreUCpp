@@ -97,6 +97,33 @@ STM32F030:
       heap: 30K
       stack: 768
 
+STM32F042:
+  cpu: M0
+  svd: STM32F042x.svd
+  definitions:
+    - STM32
+    - STM32F0
+    - STM32F042
+  renames:
+    GPIOA: GPIO
+    USART1: USART
+    SPI1: SPI
+    I2C1: I2C
+    CAN1: CAN
+    DMA1: DMA
+    Flash: FLASH
+  variants:
+    STM32F042X4:
+      rom: { base: 0x08000000, size: 16K }
+      ram: { base: 0x20000000, size: 6K }
+      heap: 4K
+      stack: 768
+    STM32F042X6:
+      rom: { base: 0x08000000, size: 32K }
+      ram: { base: 0x20000000, size: 6K }
+      heap: 4K
+      stack: 768
+
 STM32F072:
   cpu: M0
   svd: STM32F072x.svd
