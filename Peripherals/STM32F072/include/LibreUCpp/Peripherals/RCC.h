@@ -396,7 +396,7 @@ struct __attribute__((aligned(4), packed)) RCC_T
             unsigned IOPBEN  : 1; // bit 18 I/O port B clock enable
             unsigned IOPCEN  : 1; // bit 19 I/O port C clock enable
             unsigned IOPDEN  : 1; // bit 20 I/O port D clock enable
-            unsigned         : 1; // bit 21 unused
+            unsigned IOPEEN  : 1; // bit 21 I/O port E clock enable
             unsigned IOPFEN  : 1; // bit 22 I/O port F clock enable
             unsigned         : 1; // bit 23 unused
             unsigned TSCEN   : 1; // bit 24 Touch sensing controller clock enable
@@ -427,6 +427,9 @@ struct __attribute__((aligned(4), packed)) RCC_T
         static constexpr unsigned IOPDEN_POS = 20;
         static constexpr unsigned IOPDEN_MASK = 0x00100000;
         static constexpr unsigned IOPDEN(unsigned value) { return (value << 20); }
+        static constexpr unsigned IOPEEN_POS = 21;
+        static constexpr unsigned IOPEEN_MASK = 0x00200000;
+        static constexpr unsigned IOPEEN(unsigned value) { return (value << 21); }
         static constexpr unsigned IOPFEN_POS = 22;
         static constexpr unsigned IOPFEN_MASK = 0x00400000;
         static constexpr unsigned IOPFEN(unsigned value) { return (value << 22); }
