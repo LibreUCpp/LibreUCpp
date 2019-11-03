@@ -35,6 +35,19 @@ int main()
 
     uart.Setup(UART::INSTANCE::USART1, clk.CalcAHBFrequency());
 #endif
+#ifdef STM32F072DISCOVERY
+    clk.Configure(ClockConfig::Get48MHzFrom8MHzCrystal());
+
+    Pin txd { Port::A[9] };
+    txd.EnablePeripheral();
+    txd.ConfigureMultiplex(Pin::Mux::AF1);
+
+    Pin rxd { Port::A[10] };
+    rxd.EnablePeripheral();
+    rxd.ConfigureMultiplex(Pin::Mux::AF1);
+
+    uart.Setup(UART::INSTANCE::USART1, clk.CalcAHBFrequency());
+#endif
 #ifdef STM32F4DISCOVERY
     clk.Configure(ClockConfig::Get168MHzFrom8MHzCrystal());
 #endif
