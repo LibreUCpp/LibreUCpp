@@ -11,11 +11,38 @@ namespace HAL {
 class Port
 {
     public:
-    #ifdef LIBREUCPP_STM32F030
-        static Port A, B, C, D, F;
+    #ifdef LIBREUCPP_HAL_HAS_GPIOA
+        static Port A;
     #endif
-    #ifdef LIBREUCPP_STM32F407
-        static Port A, B, C, D, E, F, G, H, I, J, K;
+    #ifdef LIBREUCPP_HAL_HAS_GPIOB
+        static Port B;
+    #endif
+    #ifdef LIBREUCPP_HAL_HAS_GPIOC
+        static Port C;
+    #endif
+    #ifdef LIBREUCPP_HAL_HAS_GPIOD
+        static Port D;
+    #endif
+    #ifdef LIBREUCPP_HAL_HAS_GPIOE
+        static Port E;
+    #endif
+    #ifdef LIBREUCPP_HAL_HAS_GPIOF
+        static Port F;
+    #endif
+    #ifdef LIBREUCPP_HAL_HAS_GPIOG
+        static Port G;
+    #endif
+    #ifdef LIBREUCPP_HAL_HAS_GPIOH
+        static Port H;
+    #endif
+    #ifdef LIBREUCPP_HAL_HAS_GPIOI
+        static Port I;
+    #endif
+    #ifdef LIBREUCPP_HAL_HAS_GPIOJ
+        static Port J;
+    #endif
+    #ifdef LIBREUCPP_HAL_HAS_GPIOK
+        static Port K;
     #endif
 
         constexpr Port(intptr_t addr)
